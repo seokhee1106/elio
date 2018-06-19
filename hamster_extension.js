@@ -736,7 +736,7 @@
 								}
 								targetTime += 20;
 							}
-							setTimeout(run, 5);
+							setTimeout(run, 5000);
 						}
 					};
 					
