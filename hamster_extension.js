@@ -435,6 +435,7 @@
 	}
 	
 	function removeTimeout(id) {
+		console.log("removeTimeout");
 		clearTimeout(id);
 		var index = timeouts.indexOf(id);
 		if(index >= 0) {
@@ -443,6 +444,8 @@
 	}
 
 	function removeAllTimeouts() {
+		console.log("removeAllTimeouts");
+		
 		for(var i in timeouts) {
 			clearTimeout(timeouts[i]);
 		}
@@ -450,45 +453,54 @@
 	}
 	
 	function clearMotoring() {
+		console.log("clearMotoring");
 		motoring.map = 0xfc000000;
 	}
 	
 	function setLeftLed(color) {
+		console.log("setLeftLed");
 		motoring.leftLed = color;
 		motoring.map |= 0x01000000;
 	}
 	
 	function setRightLed(color) {
+		console.log("setRightLed");
 		motoring.rightLed = color;
 		motoring.map |= 0x00800000;
 	}
 	
 	function setNote(note) {
+		console.log("setNote");
 		motoring.note = note;
 		motoring.map |= 0x00400000;
 	}
 
 	function setLineTracerMode(mode) {
+		console.log("setLineTracerMode");
 		motoring.lineTracerMode = mode;
 		motoring.map |= 0x00200000;
 	}
 	
 	function setLineTracerSpeed(speed) {
+		console.log("setLineTracerSpeed");
 		motoring.lineTracerSpeed = speed;
 		motoring.map |= 0x00100000;
 	}
 	
 	function setIoModeA(mode) {
+		console.log("setIoModeA");
 		motoring.ioModeA = mode;
 		motoring.map |= 0x00080000;
 	}
 	
 	function setIoModeB(mode) {
+		console.log("setIoModeB");
 		motoring.ioModeB = mode;
 		motoring.map |= 0x00040000;
 	}
 
 	function reset() {
+		console.log("reset");
 		motoring.map = 0xfdfc0000;
 		motoring.leftWheel = 0;
 		motoring.rightWheel = 0;
@@ -514,6 +526,8 @@
 	}
 	
 	function handleLineTracer() {
+		console.log("handleLineTracer");
+
 		if(sensory.map & 0x00000010) {
 			if(sensory.lineTracerState == 0x40) {
 				setLineTracerMode(0);
@@ -525,6 +539,9 @@
 	}
 	
 	function handleBoard() {
+
+		console.log("handleBoard");
+
 		if(boardCommand == 1) {
 			switch(boardState) {
 				case 1: {
@@ -677,6 +694,8 @@
 	}
 	
 	function open(url) {
+		console.log("open");
+
 		if('WebSocket' in window) {
 			try {
 				var sock = new WebSocket(url);
@@ -751,6 +770,9 @@
 	}
 
 	function close() {
+
+	console.log("close");
+
 		canSend = false;
 		if(socket) {
 			socket.close();
@@ -759,6 +781,9 @@
 	}
 
 	ext.boardMoveForward = function(callback) {
+
+		console.log("boardMoveForward");
+
 		motoring.motion = MOTION.NONE;
 		setLineTracerMode(0);
 		motoring.leftWheel = 45;
@@ -770,6 +795,9 @@
 	};
 
 	ext.boardTurn = function(direction, callback) {
+
+		console.log("boardTurn");
+
 		motoring.motion = MOTION.NONE;
 		setLineTracerMode(0);
 		if(VALUES[direction] === LEFT) {
@@ -787,6 +815,9 @@
 	};
 	
 	ext.moveForward = function(callback) {
+		console.log("moveForward");
+
+
 		motoring.motion = MOTION.FORWARD;
 		boardCommand = 0;
 		setLineTracerMode(0);
@@ -803,6 +834,10 @@
 	};
 	
 	ext.moveBackward = function(callback) {
+
+		console.log("moveBackward");
+
+
 		motoring.motion = MOTION.BACKWARD;
 		boardCommand = 0;
 		setLineTracerMode(0);
@@ -819,6 +854,9 @@
 	};
 	
 	ext.turn = function(direction, callback) {
+
+		console.log("turn");
+
 		boardCommand = 0;
 		setLineTracerMode(0);
 		if(VALUES[direction] === LEFT) {
@@ -841,6 +879,8 @@
 	};
 
 	ext.moveForwardForSecs = function(sec, callback) {
+		console.log("moveForwardForSecs");
+
 		sec = parseFloat(sec);
 		boardCommand = 0;
 		setLineTracerMode(0);
@@ -862,6 +902,10 @@
 	};
 
 	ext.moveBackwardForSecs = function(sec, callback) {
+
+		console.log("moveBackwardForSecs");
+
+
 		sec = parseFloat(sec);
 		boardCommand = 0;
 		setLineTracerMode(0);
@@ -883,6 +927,11 @@
 	};
 
 	ext.turnForSecs = function(direction, sec, callback) {
+
+
+		console.log("moveBackwardForSecs");
+
+
 		sec = parseFloat(sec);
 		boardCommand = 0;
 		setLineTracerMode(0);
@@ -910,6 +959,10 @@
 	};
 	
 	ext.changeBothWheelsBy = function(left, right) {
+
+		console.log("changeBothWheelsBy");
+
+
 		left = parseFloat(left);
 		right = parseFloat(right);
 		motoring.motion = MOTION.NONE;
@@ -958,6 +1011,10 @@
 	};
 
 	ext.setWheelTo = function(which, speed) {
+
+		console.log("setWheelTo");
+
+
 		speed = parseFloat(speed);
 		motoring.motion = MOTION.NONE;
 		boardCommand = 0;
@@ -976,6 +1033,9 @@
 	};
 
 	ext.followLineUsingFloorSensor = function(color, which) {
+
+		console.log("followLineUsingFloorSensor");
+
 		var mode = 1;
 		which = VALUES[which];
 		if(which === RIGHT)
@@ -993,6 +1053,10 @@
 	};
 
 	ext.followLineUntilIntersection = function(color, which, callback) {
+
+		console.log("followLineUntilIntersection");
+
+
 		var mode = 4;
 		which = VALUES[which];
 		if(which === RIGHT)
@@ -1013,6 +1077,10 @@
 	};
 
 	ext.setFollowingSpeedTo = function(speed) {
+
+		console.log("setFollowingSpeedTo");
+
+
 		speed = parseInt(speed);
 		if(typeof speed == 'number') {
 			setLineTracerSpeed(speed);
@@ -1020,6 +1088,10 @@
 	};
 
 	ext.stop = function() {
+
+		console.log("stop");
+
+
 		motoring.motion = MOTION.NONE;
 		boardCommand = 0;
 		setLineTracerMode(0);
@@ -1028,6 +1100,9 @@
 	};
 
 	ext.setLedTo = function(which, color) {
+
+		console.log("setLedTo");
+
 		color = COLORS[color];
 		if(color && color > 0) {
 			which = VALUES[which];
@@ -1043,6 +1118,9 @@
 	};
 
 	ext.clearLed = function(which) {
+
+		console.log("clearLed");
+
 		which = VALUES[which];
 		if(which === LEFT) {
 			setLeftLed(0);
@@ -1055,6 +1133,9 @@
 	};
 
 	ext.beep = function(callback) {
+
+		console.log("beep");
+
 		motoring.buzzer = 440;
 		setNote(0);
 		var timer = setTimeout(function() {
@@ -1066,6 +1147,9 @@
 	};
 
 	ext.changeBuzzerBy = function(value) {
+
+		console.log("changeBuzzerBy");
+
 		var buzzer = parseFloat(value);
 		if(typeof buzzer == 'number') {
 			motoring.buzzer += buzzer;
@@ -1074,6 +1158,9 @@
 	};
 
 	ext.setBuzzerTo = function(value) {
+
+		console.log("setBuzzerTo");
+
 		var buzzer = parseFloat(value);
 		if(typeof buzzer == 'number') {
 			motoring.buzzer = buzzer;
@@ -1082,11 +1169,18 @@
 	};
 
 	ext.clearBuzzer = function() {
+
+		console.log("clearBuzzer");
+
 		motoring.buzzer = 0;
 		setNote(0);
 	};
 	
 	ext.playNoteFor = function(note, octave, beat, callback) {
+
+		console.log("playNoteFor");
+
+
 		note = NOTES[note];
 		octave = parseInt(octave);
 		var tmp = BEATS[beat];
@@ -1120,6 +1214,10 @@
 	};
 
 	ext.restFor = function(beat, callback) {
+
+		console.log("restFor");
+
+
 		var tmp = BEATS[beat];
 		if(tmp) beat = tmp;
 		else beat = parseFloat(beat);
@@ -1137,6 +1235,10 @@
 	};
 
 	ext.changeTempoBy = function(value) {
+
+		console.log("changeTempoBy");
+
+
 		value = parseFloat(value);
 		if(typeof value == 'number') {
 			tempo += value;
@@ -1145,6 +1247,10 @@
 	};
 
 	ext.setTempoTo = function(value) {
+
+		console.log("setTempoTo");
+
+
 		value = parseFloat(value);
 		if(typeof value == 'number') {
 			tempo = value;
@@ -1153,50 +1259,82 @@
 	};
 
 	ext.leftProximity = function() {
+
+		console.log("leftProximity");
+
 		return sensory.leftProximity;
 	};
 
 	ext.rightProximity = function() {
+		console.log("rightProximity");
+
 		return sensory.rightProximity;
 	};
 
 	ext.leftFloor = function() {
+
+		console.log("leftFloor");
+
 		return sensory.leftFloor;
 	};
 
 	ext.rightFloor = function() {
+
+		console.log("rightFloor");
+
 		return sensory.rightFloor;
 	};
 
 	ext.accelerationX = function() {
+
+		console.log("accelerationX");
+
 		return sensory.accelerationX;
 	};
 
 	ext.accelerationY = function() {
+
+		console.log("accelerationY");
+
 		return sensory.accelerationY;
 	};
 
 	ext.accelerationZ = function() {
+
+		console.log("accelerationZ");
+
 		return sensory.accelerationZ;
 	};
 
 	ext.light = function() {
+
+		console.log("light");
+
 		return sensory.light;
 	};
 
 	ext.temperature = function() {
+
+		console.log("temperature");
 		return sensory.temperature;
 	};
 
 	ext.signalStrength = function() {
+
+		console.log("signalStrength");
 		return sensory.signalStrength;
 	};
 
 	ext.handFound = function() {
+		console.log("handFound");
+
 		return sensory.leftProximity > 50 || sensory.rightProximity > 50;
 	};
 
 	ext.setPortTo = function(port, mode) {
+
+		console.log("setPortTo");
+
 		mode = MODES[mode];
 		if(typeof mode == 'number') {
 			if(port == 'A') {
@@ -1211,6 +1349,9 @@
 	};
 
 	ext.changeOutputBy = function(port, value) {
+
+		console.log("changeOutputBy");
+
 		value = parseFloat(value);
 		if(typeof value == 'number') {
 			if(port == 'A') {
@@ -1225,6 +1366,9 @@
 	};
 
 	ext.setOutputTo = function(port, value) {
+
+		console.log("setOutputTo");
+
 		value = parseFloat(value);
 		if(typeof value == 'number') {
 			if(port == 'A') {
@@ -1239,6 +1383,10 @@
 	};
 	
 	ext.gripper = function(action, callback) {
+
+		console.log("gripper");
+
+
 		action = VALUES[action];
 		setIoModeA(10);
 		setIoModeB(10);
@@ -1257,6 +1405,10 @@
 	};
 	
 	ext.releaseGripper = function() {
+
+		console.log("releaseGripper");
+
+
 		setIoModeA(10);
 		setIoModeB(10);
 		motoring.outputA = 0;
@@ -1264,14 +1416,25 @@
 	};
 
 	ext.inputA = function() {
+
+		console.log("inputA");
+
+
 		return sensory.inputA;
 	};
 
 	ext.inputB = function() {
+
+		console.log("inputB");
+
 		return sensory.inputB;
 	};
 	
 	ext._getStatus = function() {
+
+		console.log("_getStatus");
+
+
 		switch(connectionState) {
 			case STATE.CONNECTED:
 				return { status: 2, msg: STATE_MSG[lang][2] };
@@ -1282,11 +1445,17 @@
 	};
 
 	ext._shutdown = function() {
+
+		console.log("_shutdown");
+
 		reset();
 		close();
 	};
 
 	ext.resetAll = function() {
+
+		console.log("resetAll");
+
 		reset();
 	};
 
