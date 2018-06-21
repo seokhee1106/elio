@@ -1467,5 +1467,5 @@
 
 	ScratchExtensions.register(EXTENSION_NAME[lang], descriptor, ext);
 
-	open('ws://localhost:51417/elio/');
+	open('http://localhost:51417/elio/');
 })({});
