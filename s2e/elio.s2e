@@ -1,19 +1,21 @@
-{	"extensionName": "elio1 (robotics For elio)",
-	"extensionPort": 50417,
+{	"extensionName": "ELIO (robotics For ELIO)",
+	"extensionPort": 10417,
 	"blockSpecs": [
-		[" ", "%m.IO io port set power to %n%", "setIO", "", 100],
-		[" ", "%m.DC dc motor  set power to %n%", "setDC",  "", 100],
-		[" ", "%m.SERVO servo motor power to %n%", "setServo","",   100],
-		["r", "get power of  %m.DC port", "readDC", "", "10"],
-		
-		["r", "get %m.coordinate position of %m.bodyPart", "position" ],
+			[" ", "io %m.IO set %n% power", "setIO", "3v", 0],
+			[" ", "dc motor %m.DC  set %n% power", "setDC",  "dc1", 0],
+			[" ", "servo motor %m.SERVO set %n% power", "setServo","servo1",   0],
+			[" ", "set all %m.DC %n%, %m.DC %n%,%m.SERVO %n%, %m.SERVO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%", "setAllPower", 	"dc1", 0, "dc2", 0, 
+																																								"servo1", 0, "servo2", 0, 
+																																								"3v", 0, "5v", 0, 
+																																								"io1", 0, "io2" ,0, "io3", 0, "io4", 0],
+			["r", "get dc power of %m.DC", "readDC", "dc1"],
+			["r", "get servo power of %m.SERVO", "readServo", "servo1"],
+			["r", "get io power of io %m.IO", "readIO", "io1"],
 		],
 	"menus": {
 		"IO": ["3v", "5v","io1","io2","io3", "io4"],
 		"DC": ["dc1", "dc2"],
 		"SERVO": ["servo1", "servo2"],
-		"coordinate": ["x", "y", "z"],
-		"bodyPart": ["head", "shoulder", "elbow", "hand"],
-},
+		},
 	},
-}s
+}

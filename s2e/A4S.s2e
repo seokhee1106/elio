@@ -1,5 +1,5 @@
 {	"extensionName": "A4S (Arduino1 For Scratch)",
-	"extensionPort": 12345,
+	"extensionPort": 10417,
 	"blockSpecs": [
 //		[" ", "set pin %n high", "pinHigh", 13],
 //		[" ", "set pin %n low", "pinLow", 13],
@@ -12,9 +12,16 @@
 		[" ", "servo write pin %n degrees %n", "servoWrite", 5, 180],
 		["b", "digital read pin %n", "digitalRead", 2],
 		["r", "analog read pin %n", "analogRead", 0],
+		["r", "io1", "io1"],
+		["r", "io2", "io2"],
+		["r", "io3", "io3"],
+		["r", "io4", "io4"],
+		["r", "get %m.coordinate position of %m.bodyPart", "position"],
 	],
 	"menus": {
 		"mode": ["Digital Input", "Digital Output","Analog Input","Analog Output(PWM)","Servo"],
 		"highLow": ["high", "low"],
+		"coordinate": ["x", "y", "z"],
+		"bodyPart": ["head", "shoulder", "elbow", "hand"],
 	},
 }
