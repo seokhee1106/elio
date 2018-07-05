@@ -1,9 +1,19 @@
 {	"extensionName": "ELIO (robotics For ELIO)",
 	"extensionPort": 10417,
 	"blockSpecs": [
-			[" ", "io %m.IO set %n% power", "setIO", "3v", 0],
-			[" ", "dc motor %m.DC  set %n% power", "setDC",  "dc1", 0],
-			[" ", "servo motor %m.SERVO set %n% power", "setServo","servo1",   0],
+			[" ", "set io %m.IO %n% ", "setIO", "3v", 0],
+			[" ", "set %m.IO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%", "setIOs", 	"3v", 0, "5v", 0, 
+																											"io1", 0, "io2" ,0, "io3", 0, "io4", 0],
+			
+			[" ", "set dc motor %m.DC %n% ", "setDC",  "dc1", 0],
+			[" ", "set %m.DC %n%, %m.DC %n%", "setDCs", 	"dc1", 0, "dc2", 0 ],
+			
+
+
+			[" ", "set servo motor %m.SERVO %n% ", "setServo","servo1",   0],
+			[" ", "set %m.SERVO %n%, %m.SERVO %n%", "setServos", 	"servo1", 0, "servo2", 0],
+			
+			
 			[" ", "set all %m.DC %n%, %m.DC %n%,%m.SERVO %n%, %m.SERVO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%, %m.IO %n%", "setAllPower", 	"dc1", 0, "dc2", 0, 
 																																								"servo1", 0, "servo2", 0, 
 																																								"3v", 0, "5v", 0, 
